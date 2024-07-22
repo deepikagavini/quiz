@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7e4e1;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 600px;
+            background-color: rgb(214, 165, 173);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 25px;
+        }
+        .options li:hover {
+            background-color: #3a3434;
+        }
+        .correct {
+            background-color: #12ac43; /* Green */
+        }
+        .wrong {
+            background-color: #a71818; /* Red */
+        }
+        .feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Quiz</h2>
+        <div class="question" id="question">
+            <h1>What is the capital of France?</h1>
+        </div>
+        <ul class="options" id="options">
+            <li onclick="checkAnswer(this)">A. Paris</li>
+            <li onclick="checkAnswer(this)">B. London</li>
+            <li onclick="checkAnswer(this)">C. Berlin</li>
+            <li onclick="checkAnswer(this)">D. Rome</li>
+        </ul>
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        function checkAnswer(option) {
+            // Get the correct answer from the options
+            const correctAnswer = "A. Paris";
+
+            // Remove previous feedback
+            const feedbackElement = document.getElementById("feedback");
+            feedbackElement.textContent = "";
+
+            // Check if the selected option is correct
+            if (option.textContent === correctAnswer) {
+                option.classList.add("correct");
+                feedbackElement.textContent = "Correct!";
+            } else {
+                option.classList.add("wrong");
+                feedbackElement.textContent = "Wrong answer. Try again!";
+            }
+
+            // Disable further clicks on options after answering
+            const options = document.querySelectorAll(".options li");
+            options.forEach((opt) => {
+                opt.onclick = null;
+            });
+        }
+    </script>
+</body>
+</html>
